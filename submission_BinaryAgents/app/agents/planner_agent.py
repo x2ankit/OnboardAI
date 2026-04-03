@@ -121,8 +121,13 @@ class PlannerAgent:
         if the Gemini API is unreachable (e.g. no internet at hackathon).
         """
         email_missing = "MISSING" in state or "skip SEND_EMAIL" in state
+        try:
+            completed_str = state.split("Completed: [")[1].split("]")[0]
+        except IndexError:
+            completed_str = ""
+
         for step in AVAILABLE_ACTIONS[:-1]:   # all except DONE
-            if step in state:
+            if step in completed_str:
                 continue
             if step == "SEND_EMAIL" and email_missing:
                 continue
