@@ -1,40 +1,41 @@
-"""
-tools/drive_tool.py
---------------------
-Simulated Google Drive folder creation tool.
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+import os
 
-In a real system this would use the Google Drive API (google-api-python-client).
-"""
+SCOPES = ['https://www.googleapis.com/auth/drive']
 
-import random
-import string
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, 'service_account.json')
 
+def create_drive_folder(client_name):
+    try:
+        creds = service_account.Credentials.from_service_account_file(
+            SERVICE_ACCOUNT_FILE,
+            scopes=SCOPES
+        )
 
-def create_drive_folder(client_name: str) -> dict:
-    """
-    Create a Google Drive folder for the client's assets.
+        service = build('drive', 'v3', credentials=creds)
 
-    Args:
-        client_name: The client's company name.
-
-    Returns:
-        A result dict with keys: success (bool), output (str), error (str).
-    """
-    if not client_name or not str(client_name).strip():
-        return {
-            "success": False,
-            "error": "Client name is required to create a Drive folder.",
+        folder_metadata = {
+            'name': f"{client_name} - Onboarding Assets",
+            'mimeType': 'application/vnd.google-apps.folder'
         }
 
-    # Simulate a Drive folder ID (16-char alphanumeric)
-    folder_id = "".join(random.choices(string.ascii_letters + string.digits, k=16))
-    folder_name = f"{client_name.strip()} — Onboarding Assets"
+        folder = service.files().create(
+            body=folder_metadata,
+            fields='id'
+        ).execute()
 
-    return {
-        "success": True,
-        "output": (
-            f"📁 Google Drive folder created: '{folder_name}' | "
-            f"Folder ID: {folder_id} | "
-            f"Shared with: onboard@company.io"
-        ),
-    }
+        folder_id = folder.get('id')
+
+        return {
+            "status": "SUCCESS",
+            "message": f"Drive folder created",
+            "link": f"https://drive.google.com/drive/folders/{folder_id}"
+        }
+
+    except Exception as e:
+        return {
+            "status": "ERROR",
+            "message": str(e)
+        }

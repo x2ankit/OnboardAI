@@ -55,7 +55,13 @@ class ExecutorAgent:
             if action == "SEND_EMAIL":
                 return tool_fn(name, email)
             elif action == "CREATE_DRIVE_FOLDER":
-                return tool_fn(name)
+                res = tool_fn(name)
+                if isinstance(res, dict) and "status" in res:
+                    if res["status"] == "SUCCESS":
+                        return {"success": True, "output": f"{res.get('message')} → {res.get('link')}"}
+                    else:
+                        return {"success": False, "error": res.get("message")}
+                return res
             elif action in ("CREATE_NOTION_PAGE", "CREATE_AIRTABLE_RECORD"):
                 return tool_fn(name, industry)
 
