@@ -61,8 +61,8 @@ Crucially, the system features a robust **Heuristic Edge-Case Fallback Mechanism
 
 | Layer | Percentage | Description |
 |---|---|---|
-| Deterministic automation | 60% | Formatting payload tracking models, executing individual REST APIs, validation parameter blocking, system error handling, and generating Markdown result logs |
-| LLM-driven and agentic | 40% | Contextually understanding unstructured payload inputs, prioritizing task execution flows, and adapting dynamic routing when unexpected client inputs are triggered |
+| Agentic / LLM-driven | 65% | Responsible for reasoning, planning, and dynamic decision-making |
+| Deterministic automation | 35% | Handles execution, validation, logging, and system stability |
 
 The agentic layer acts as the actual "manager" of the state machine, decoupling task execution from a rigid timeline. If the LLM were stripped out and replaced with a fixed script, the system would immediately lose situational awareness. For example, it would mindlessly attempt to execute an email-send protocol even if the client JSON payload's unstructured notes indicated the email was actively "Missing", leading to catastrophic pipeline crashes.
 
