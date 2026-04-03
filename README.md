@@ -5,7 +5,7 @@
 ### Autonomous Client Onboarding — Powered by Agentic AI
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)](https://python.org)
-[![Gemini](https://img.shields.io/badge/LLM-Gemini_2.0_Flash-orange?logo=google)](https://ai.google.dev/)
+[![Gemini](https://img.shields.io/badge/LLM-Gemini_2.5_Flash-orange?logo=google)](https://ai.google.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Hackathon](https://img.shields.io/badge/Hackathon-Agentic_AI_2026-purple)](.)
 
@@ -69,7 +69,7 @@ Remove the LLM and the system loses all intelligence — that's what makes it tr
 
 | Agent | Character | Role | Technology |
 |---|---|---|---|
-| **Planner** | 🧠 Oogway | Decides the next action | Gemini 2.0 Flash |
+| **Planner** | 🧠 Oogway | Decides the next action | Gemini 2.5 Flash |
 | **Executor** | ⚡ Po | Runs the tool for that action | Python functions |
 | **Validator** | 🛡️ Viper | Checks output, handles edge cases | Rule-based logic |
 
@@ -174,7 +174,7 @@ python submission_BinaryAgents/app/main.py
 | Layer | Technology |
 |---|---|
 | Language | Python 3.10+ |
-| LLM | Google Gemini 2.0 Flash (`google-genai`) |
+| LLM | Google Gemini 2.5 Flash (`google-genai`) |
 | Config | `python-dotenv` |
 | Output | Markdown (`outputs/`) |
 | Architecture | Custom multi-agent loop |

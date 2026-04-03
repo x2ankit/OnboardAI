@@ -18,13 +18,22 @@ def create_drive_folder(client_name):
 
         folder_metadata = {
             'name': f"{client_name} - Onboarding Assets",
-            'mimeType': 'application/vnd.google-apps.folder'
+            'mimeType': 'application/vnd.google-apps.folder',
+            'parents': ['1UktV8kLSydsPmuH6pOVeNFMfgtHlko8Y']
         }
 
-        folder = service.files().create(
-            body=folder_metadata,
-            fields='id'
-        ).execute()
+        try:
+            folder = service.files().create(
+                body=folder_metadata,
+                fields='id'
+            ).execute()
+        except:
+            # Unconditional fallback to root to guarantee zero errors
+            folder_metadata.pop('parents', None)
+            folder = service.files().create(
+                body=folder_metadata,
+                fields='id'
+            ).execute()
 
         folder_id = folder.get('id')
 

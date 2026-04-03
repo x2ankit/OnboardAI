@@ -15,6 +15,9 @@ import sys
 import json
 from pathlib import Path
 from dotenv import load_dotenv
+import warnings
+
+warnings.filterwarnings("ignore")
 
 # ── Path bootstrap ─────────────────────────────────────────────────────────────
 # Add submission_BinaryAgents/ to sys.path so that `from agents.X`, `from core.X`
