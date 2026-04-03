@@ -46,10 +46,30 @@ def send_email(client_name: str, contact_email: str) -> dict:
             msg = MIMEMultipart()
             msg['From'] = gmail_user
             msg['To'] = contact_email
-            msg['Subject'] = f"Welcome aboard, {client_name}!"
+            msg['Subject'] = f"🚀 Exclusive Onboarding Initiated: Welcome to the Future, {client_name}!"
 
-            body = f"Hello {client_name} team,\n\nWelcome to our platform! We are thrilled to have you onboard.\n\nPlease find your onboarding assets enclosed shortly.\n\nBest,\nOnboardAI Autonomous Agent"
-            msg.attach(MIMEText(body, 'plain'))
+            body = f"""\
+<html>
+  <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2C3E50; line-height: 1.6; max-width: 600px; margin: 0 auto; padding: 20px;">
+    <div style="background-color: #F8F9FA; padding: 30px; border-radius: 8px; border-left: 5px solid #3498DB;">
+      <h2 style="color: #2980B9; margin-top: 0;">Welcome to the Platform, {client_name} 🌟</h2>
+      <p style="font-size: 16px;">Dear <strong>{client_name}</strong> Team,</p>
+      <p style="font-size: 16px;">We are absolutely thrilled to officially welcome you onboard.</p>
+      <p style="font-size: 16px;">Our autonomous AI agent, <strong>OnboardAI</strong>, has already begun provisioning your exclusive enterprise workspace. Within moments, your infrastructure will be fully operational, including:</p>
+      <ul style="font-size: 16px; color: #34495E;">
+        <li>✨ Your dedicated Google Drive assets portal</li>
+        <li>✨ Your customized Notion tracking dashboard</li>
+        <li>✨ Your synchronized Airtable CRM records</li>
+      </ul>
+      <p style="font-size: 16px;">We believe in frictionless scaling so you can focus entirely on what you do best. Should you need any immediate assistance, our dedicated engineering team is standing by.</p>
+      <hr style="border: 0; border-top: 1px solid #EAECEE; margin: 30px 0;">
+      <p style="font-size: 14px; color: #7F8C8D; margin-bottom: 0;">Warmest regards,</p>
+      <p style="font-size: 16px; color: #2C3E50; margin-top: 5px;"><strong>The OnboardAI Executive Team</strong></p>
+    </div>
+  </body>
+</html>
+"""
+            msg.attach(MIMEText(body, 'html'))
 
             # Send via Gmail SMTP server
             server = smtplib.SMTP("smtp.gmail.com", 587)

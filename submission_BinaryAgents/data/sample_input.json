@@ -1,22 +1,10 @@
 {
     "clients": [
         {
-            "client_name": "TechGlobal Inc.",
-            "contact_email": "punimamahakul2007@gmail.com",
+            "client_name": "Testing Organization",
+            "contact_email": "purnimamahakul2007@gmail.com",
             "industry": "Cloud Computing",
             "notes": "Premium client, high urgency."
-        },
-        {
-            "client_name": "GreenLife Organics",
-            "contact_email": "",
-            "industry": "Agriculture",
-            "notes": "Missing email on file - should trigger edge case handling."
-        },
-        {
-            "client_name": "Innova Solutions",
-            "contact_email": "contact@innovasolutions.com",
-            "industry": "FinTech",
-            "notes": "Standard onboarding."
         }
     ]
 }

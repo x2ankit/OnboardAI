@@ -68,7 +68,7 @@ class PlannerAgent:
         if not self.api_key:
             raise ValueError("GOOGLE_API_KEY is not set.")
         self.client   = genai.Client(api_key=self.api_key)
-        self.model_id = "gemini-2.5-flash"
+        self.model_id = "gemini-2.0-flash"
 
     def decide(self, current_state: str, client_data: dict) -> dict:
         """
