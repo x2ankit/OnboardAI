@@ -20,6 +20,7 @@ import json
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
+from utils.logger import OnboardLogger
 
 load_dotenv()
 
@@ -105,7 +106,8 @@ class PlannerAgent:
             return decision
 
         except Exception as exc:
-            print(f"[Planner] LLM call failed: {exc} — falling back to heuristic.")
+            OnboardLogger.plan(f"LLM failed → switching to fallback ({exc})")
+            OnboardLogger.decision("Using fallback planner due to API limit")
             return {
                 "action":    self._heuristic_fallback(current_state),
                 "reasoning": "Heuristic fallback: LLM unavailable.",
